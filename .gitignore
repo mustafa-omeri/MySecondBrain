@@ -58,3 +58,9 @@ staging/*
 # --- Python önbelleği (tools/secret-vault çalıştırınca oluşur) ---
 __pycache__/
 *.pyc
+
+# --- Ortam değişkenleri ve sırlar ---
+.env
+*.env
+.env.*
+!.env.example
