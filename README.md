@@ -61,7 +61,7 @@ pwsh -NoProfile -File tools\vault-baslangic-dogrula.ps1
 | Ne yapmak istiyorum | Komut / dosya |
 |---|---|
 | ⭐ **Vault'u kurmak (bir kez)** | `hazırla` |
-| ⭐ **Yeni proje bağlamak** | `PROJE_INIT_REPO.md` (kod ajanına) → `PROJE_INIT_VAULT.md` (burada) |
+| ⭐ **Yeni proje bağlamak** | `pwsh -NoProfile -File tools\proje-init.ps1 -Repo "<proje klasörü>"` |
 | ⭐ **Belge ekleyip işletmek** | `raw/` altına koy → `RAW_ISLEM_PROMPT.md` |
 | **Sohbet tepkim kaydetmek** | `raw/chats/<ajtör>/` + `raw/chats/_SABLON/chat-sablonu.md` |
 | **Ne olduğunu öğrenmek** | `log.md` (son 15 satır) |

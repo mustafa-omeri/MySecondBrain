@@ -36,10 +36,22 @@ Kuralları okuyan bir ajan seni **tanımaz** — sadece *kuralları* bilir.
 
 ## ADIM 0 — ⭐ VAULT YOLU
 
-Şablonda `<VAULT_YOLU>` placeholder'ı var. Bu, **senin vault'unun tam yolu**.
+Şablonda vault yolu placeholder'ları var. Bu, **senin vault'unun tam yolu**.
 
 Ajan bunu **kendisi** tespit eder (çalıştığı klasör = vault kökü) ve tüm
-dosyalardaki `<VAULT_YOLU>` yerine **gerçek yolu** yazar.
+dosyalardaki placeholder'ları **gerçek yolla** değiştirir.
+
+| Placeholder | Nerede |
+|---|---|
+| `<VAULT_YOLU>` | `MANUEL.md` · `RAW_ISLEM_PROMPT.md` · `HAZIRLA.md` · `log.md` · `lint-report.md` |
+| `{{VAULT_YOLU}}` | ⭐ ajan prompt'ları · `REPO_ROOT_AGENTS_STUB.md` |
+| `{{PROJE_SLUG}}` | ajan prompt'ları — **proje klasörü adı** (camelCase) |
+
+> ⭐ **İki yazım da geçerli.** Ajan ikisini de arar; hangi dosyada
+> hangisi varsa **onu** değiştirir. ⛔ Bırakılan placeholder = bozuk yol.
+>
+> ⭐ `{{PROJE_SLUG}}` **camelCase** olur (repo adıyla birebir):
+> `SecondBrainVaultMCP` → `secondBrainVaultMCP`. Kebab-case **değil**.
 
 > ⭐ Ajan `Get-Location` ile başlar. Emin değilse **sorar** — asla tahmin
 > etmez.
@@ -91,12 +103,10 @@ Bu dosyalar **boş** — içeriği yok, sadece **yapısı** var.
 
 ## ADIM 4 — İlk projeni kur
 
-`PROJE_INIT_REPO.md` + `PROJE_INIT_VAULT.md` akışı çalışır:
+**TEK komut** çalışır:
 
 ```
-Kod ajanına:  "Bu projeyi second brain yapısına bağla.
-               <VAULT_YOLU>\PROJE_INIT_REPO.md adımlarını uygula."
-Sonra:        "Yeni proje vault tarafını hazırla: <slug> · <stack>"
+pwsh -NoProfile -File "<VAULT_YOLU>\tools\proje-init.ps1" -Repo "<proje klasörü>"
 ```
 
 ## ADIM 5 — Git + MCP
@@ -135,7 +145,6 @@ Raporda hata varsa düzelt, sonra bitir.
 
 ## Related
 - `CLAUDE.md` — anayasa
-- `PROJE_INIT_REPO.md` — yeni proje (repo tarafı)
-- `PROJE_INIT_VAULT.md` — yeni proje (vault tarafı)
+- `tools/proje-init.ps1` - yeni proje (TEK komut)
 - `MANUEL.md` — insan rehberi
 - `profile/reactions.md` — yasak listesi burada birikir

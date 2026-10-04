@@ -402,10 +402,13 @@ if ($ktT -match [regex]::Escape("``$slug``")) { Uyari "kurulum tablosunda zaten 
 else {
   $kSatir = "| $short | ``$slug`` | ``$Repo`` | kök ``AGENTS.md`` | ✅ | $tarih | ``$dbSha…`` | ``proje-init $tarih`` |"
   # ⭐ GENEL: hiçbir proje adına bağlı DEĞİL.
-  #   Kurulum tablosunun BAŞLIĞI "Slug" içeren satırdır; ayraç satırı
+  #   ESKİ: '\| KalanSüre \|' ile eşleştiriyordu → o proje yeniden adlanırsa
+  #   ya da silinirse "kurulum tablosu başlık ayracı yok" uyarısı verir ve
+  #   satır hiç yazılmaz. (ACIK_ISLER P1-2, bulundu: 2026-10-04)
+  #   YENİ: kurulum tablosunun BAŞLIĞI "Slug" içeren satırdır; ayraç satırı
   #   ondan SONRAKİ ilk |---| satırıdır.
-  #   ⛔ Dosyada birden fazla tablo olabilir — ilk |---| eşleşmesi YANLIŞ
-  #   tabloya girer. Bu yüzden başlıkla birlikte eşleştiriyoruz.
+  #   ⛔ Dosyada 7+ tablo var — ilk |---| eşleşmesi YANLIŞ tabloya girer
+  #   (Adım | Nerede tablosu). Bu yüzden başlıkla birlikte eşleştiriyoruz.
   $reKt = [regex]::new('(?m)^(\|[^\r\n]*\bSlug\b[^\r\n]*\|)\r?\n(\|\s*-{3,}[^\r\n]*\|)')
   $yeni = $reKt.Replace($ktT, "`$1`r`n`$2`r`n$kSatir", 1)
   if ($yeni -eq $ktT) { Uyari "kurulum tablosu basligi ('Slug') bulunamadi - elle ekle" }

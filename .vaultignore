@@ -1,49 +1,80 @@
-# .vaultignore — hiç açılıp okunmayacak yollar
+# ============================================================
+# .vaultignore — HİÇ İŞLENMEYECEK YOLLAR
+# ============================================================
+# 2026-10-01 — kullanıcı önerisi: *"vault raw altına atılan bazı
+# dosyaları veya folderları hiç işlememeli. yani .vaultignore gibi
+# bir yapımız olmalı."*
+#
+# ⭐ BU `.gitignore` DEĞİLDİR. İkisi farklı sorulara cevap verir:
+#
+#   .gitignore  →  "commit edilsin mi?"        → hayır: yeniden üretilir
+#   .vaultignore→  "AÇILIP OKUNSUN MU?"        → hayır: sıfır bilgi değeri
+#
+# Bu dosyadaki bir yol:
+#   ⛔ ASLA açılmaz, okunmaz, özetlenmez, `sources/`'a yazılmaz
+#   ⛔ Gizli veri taramasından **muaf** (içeriği zaten okunmuyor)
+#   ✅ Ama **sayılır** ve **parmak izine girer** — yani varlığı bilinir,
+#      sonradan biri oraya bir şey eklerse fark edilir
+#
+# ⚠️ BU BİR KÖR NOKTA RİSKİDİR. Birinin önemli şeyi buraya atması
+# hâlinde hiç görülmez. Bu yüzden:
+#   1) Her satırda **gerekçe zorunlu** (aşağıda doğrulanır)
+#   2) Kural yalnız **teknik/üretilmiş** içerik için — asla
+#      "ilgimi çekmiyor" gerekçesiyle kullanılamaz
+#   3) Kullanıcı veya Kütüphaneci (onaylı) ekler
+#   4) Doğrulama: tools\vaultignore-dogrula.ps1
+# ============================================================
 
-> ⭐ **`.gitignore` ile KARISTIRMA:**
->
-> | | |
-> |---|---|
-> | `.gitignore` | *commit edilsin mi?* |
-> | ⭐ `.vaultignore` | ***hiç açılıp okunacak mı?*** |
->
-> Eşleşen yollar: **sayılır** (varlığı bilinir) ama **içeriği okunmaz**,
-> özetlenmez, taranmaz. Bu klasör **hiçbir zaman** wiki'ye girmez.
 
-## Format
+# ────────────────────────────────────────────────────────────
+# 1) Git iç dosyaları
+# ────────────────────────────────────────────────────────────
+# ⭐ Kanıt: 60 dosya (`raw/projects/MyFileSystemMCP/.git/`)
+#   Gizli veri taramasında 16 "api key" eşleşmesi çıktı; 16'sı da
+#   buradan geliyordu (HEAD, FETCH_HEAD, refs/heads/main, master).
+#   → Hepsi **yanlış alarm** (git SHA-1). Gerçek bilgi değeri: **sıfır**.
+**/.git/**                # gerekçe: git SHA-1/ref dosyaları — gizli veri taramasında %100 yanlış alarm üretiyor, bilgi değeri sıfır
 
-```
-# yorum satırı — bu satır yorumdur
-_alt klasör/        # _ ile başlayan her şey taranmaz
-*.tmp
-_build/
-```
 
-> Satır sonundaki `#` açıklama ekler. Pattern git ile aynı mantıkta çalışır.
+# ────────────────────────────────────────────────────────────
+# 2) Bağımlılık / derleme çıktıları
+# ────────────────────────────────────────────────────────────
+# ⭐ Bugün 0 dosya — ama bu KURAL önleyici. Bir gün bir MCP projesi
+#   `raw/`'a node_modules ile düşerse, 200.000 dosya taranmamalı.
+**/node_modules/**        # gerekçe: yeniden üretilebilir bağımlılık ağacı — `npm install` ile aynı dosyalar geri gelir
+**/dist/**                # gerekçe: derleme çıktısı — kaynak koddan yeniden üretilir, özgün bilgi yok
+**/build/**               # gerekçe: derleme çıktısı — kaynak koddan yeniden üretilir, özgün bilgi yok
+**/target/**              # gerekçe: Java derleme çıktısı — `mvn package` ile yeniden üretilir
+**/.next/**               # gerekçe: Next.js derleme önbelleği — yeniden üretilebilir
+**/__pycache__/**         # gerekçe: Python önbelleği — yorumlayıcı üretir, bilgi yok
 
-## Kurallar
 
----
+# ────────────────────────────────────────────────────────────
+# 3) İkili medya
+# ────────────────────────────────────────────────────────────
+# ⭐ Kanıt: 13 dosya (8 jpg, 3 png, 2 3gp) — hepsi `raw/knowhow/Keep/`
+#   altında bir notun **ek dosyası**. Notun metni zaten `.json`
+#   karşılığında duruyor. Medya ayrı bir bilgi katmı değil.
+**/*.jpg                 # gerekçe: not eki — metni `.json` karşılığında zaten var
+**/*.jpeg                # gerekçe: not eki — metni `.json` karşılığında zaten var
+**/*.png                 # gerekçe: not eki — metni `.json` karşılığında zaten var
+**/*.gif                 # gerekçe: not eki — metni `.json` karşılığında zaten var
+**/*.mp4                 # gerekçe: not eki — metni `.json` karşılığında zaten var
+**/*.mov                 # gerekçe: not eki — metni `.json` karşılığında zaten var
+**/*.3gp                 # gerekçe: not eki — metni `.json` karşılığında zaten var
 
-## ⭐ Şu an **hiçbir kural yok** — bu dosya boş.
 
-Şunu bil: `raw/` altına attığın **her şey** taranacak ve
-`ingest-manifest.md`'ye sayılacak. Bazı şeyleri **istemek** istemiyorsan
-(örneğin büyük geçici klasörler, indirilen veri havuzları) buraya ekle.
-
-## ⭐ Sık yapılan hata
-
-| Hata | Doğrusu |
-|---|---|
-| `.gitignore`'a eklemek | Yanlış dosya — bu **git** içindir |
-| `raw/`'ın tamamını yazmak | ⛔ Ham kaynak **zaten** özel katmandır |
-| Karar vermeden doldurmak | ⭐ Her kural bir gerekçe ister |
-
-## Doğrulama
-
-```powershell
-pwsh -NoProfile -File "<VAULT_YOLU>\tools\vaultignore-dogrula.ps1"
-```
-
-## Related
-- `CLAUDE.md` §7.0 ADIM a0
+# ────────────────────────────────────────────────────────────
+# ⛔ AŞAĞIYA KURAL EKLEMEDEN ÖNCE OKU
+# ────────────────────────────────────────────────────────────
+#
+# Bu listeye şunlar **GİRMEZ**:
+#   ⛔ "İlgimi çekmiyor"          → bu bir gerekçe değil, gizlemedir
+#   ⛔ "Zaten işlendi"            → tekrar taramayı manifest yönetir
+#   ⛔ "Çok fazla dosya var"      → sayı gerekçe değildir
+#   ⛔ `raw/chats/`               → sohbetler SİSİNİN TEPKİ VERİSİidir
+#   ⛔ `raw/knowhow/Keep/`        → 15 know-how sayfası buradan çıktı
+#
+# Tek geçerli gerekçe şablonu:
+#   "bu içerik <X> olduğu için, <X'in yeniden üretilebilmesi/taşıdığı
+#    bilgi sıfır olması> nedeniyle yeniden üretilemez/işlenmez"

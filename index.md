@@ -14,8 +14,7 @@
 | `CLAUDE.md` · `AGENTS.md` | anayasa (her ajan için bağlayıcı) |
 | `MANUEL.md` | insan rehberi — dosya nereye gider? |
 | `RAW_ISLEM_PROMPT.md` | `raw/` klasörünü işleme komutu |
-| `PROJE_INIT_REPO.md` | yeni proje → repo tarafı (kod ajanına) |
-| `PROJE_INIT_VAULT.md` | yeni proje → vault tarafı (Kütüphaneci'ye) |
+| `tools/proje-init.ps1` | **yeni proje: TEK KOMUT** - repo + vault + kayit + dogrulama |
 | `REPO_ROOT_AGENTS_STUB.md` | repo köküne `AGENTS.md` olarak kopya |
 | `ingest-manifest.md` | ⭐ ham kaynak takibi — ajan önce buraya bakar |
 | `network.md` | ⭐ çapraz karar haritası |

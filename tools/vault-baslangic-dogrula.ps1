@@ -32,7 +32,7 @@ $zorunlu = @(
   'CLAUDE.md','AGENTS.md','HAZIRLA.md','MANUEL.md','README.md','NASIL_KULLANILIR.md','ACIK_ISLER.md',
   'index.md','network.md','log.md','ingest-manifest.md','lint-report.md',
   'DEV_BRIEF.md','RAW_ISLEM_PROMPT.md',
-  'PROJE_INIT_REPO.md','PROJE_INIT_VAULT.md','REPO_ROOT_AGENTS_STUB.md',
+  'REPO_ROOT_AGENTS_STUB.md',
   'CODING_AGENT_PROMPT.md','LIBRARIAN_AGENT_PROMPT.md',
   '.gitignore','.vaultignore'
 )

@@ -154,7 +154,7 @@ Yeni bir kod projesi açtığında **iki adım** gerekir. Sırası önemli.
 
 ```
 Bu projeyi second brain yapısına bağla.
-<vault yolun>\PROJE_INIT_REPO.md dosyasındaki adımları uygula.
+<vault yolun>\tools\proje-init.ps1 dosyasını çalıştır: -Repo "<bu klasör>"
 ```
 
 Ajan sana **bir soru** sorar (*"hangi stack?"*). Cevap ver. Sonra slug'ı
@@ -314,7 +314,7 @@ git commit -m "notun ne olduğunu yaz"
 | Belirti | Sebep | Çözüm |
 |---|---|---|
 | Ajan seni **tanımıyor** | `profile/` boş | `hazırla` çalıştır |
-| Ajan **çok soru** soruyor | `PROJE_INIT_REPO.md` "TEK SORU" kuralını uygulamıyor | Ajanı uyar |
+| Ajan **çok soru** soruyor | `tools/proje-init.ps1` yerine elle adım adım yürütülüyor | Ajanı uyar |
 | Ajan **hiç soru** sormuyor | `profile/reactions.md` boş → yasak listesi yok | Tepki kaydet (yukarıya bak) |
 | Ajan **aynı hatayı** yapıyor | Hata `knowledge-base.md`'ye yazılmamış | Projede ajana söyle, sonra **2 projede de** olduysa `DEV_BRIEF.md` §3'e terfi eder |
 | `<VAULT_YOLU>` yazıyor | `hazırla` ADIM 0 yapılmamış | `hazırla` komutunu tekrar çalıştır |
@@ -333,7 +333,7 @@ git commit -m "notun ne olduğunu yaz"
 | — | ⭐ **bitti** |
 
 **Sonrası:** belge ekle → ajana `RAW_ISLEM_PROMPT.md` · yeni proje →
-`PROJE_INIT_REPO.md` · tepkini kaydet → `raw/chats/`
+``tools/proje-init.ps1`` · tepkini kaydet → `raw/chats/`
 
 ---
 

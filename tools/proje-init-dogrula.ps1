@@ -1,12 +1,19 @@
 <#
   proje-init-dogrula.ps1 — Yeni proje bağlantısı doğrulaması
 
-  ⭐ NEDEN VAR: `PROJE_INIT_REPO` + `PROJE_INIT_VAULT` iki ayrı komut.
-  Bu script, ikisinin de gerçekten çalıştığını kanıtlar. Bugüne kadar
-  elle kontrol ediliyordu — 3 repoda elle dağınıklı injector düzeltildi.
+  ⭐ NEDEN VAR: yeni proje kurulumu birden çok adımdan oluşur (3 repo
+  dosyası + vault klasörleri + 4 kayıt). Bu script hepsinin gerçekten
+  çalıştığını kanıtlar. Elle kontrol ediliyordu — 3 repoda elle dağınıklı
+  injector düzeltildi.
+
+  ⭐ 2026-10-01'de `proje-init.ps1` bu script'i kendi son adımı olarak
+  çağırır; elle çağırmaya gerek kalmadı (SadeceDogrula hariç).
+
+  ⭐ Slug camelCase olmalı — kebab-case DEĞİL:
+  → projects/_STANDARTLAR/decisions/proje-isimlendirmesi-camelcase
 
   KULLANIM:
-    pwsh -NoProfile -File tools\proje-init-dogrula.ps1 -Repo "C:\devtools\ws\MyApp" -Slug "my-app"
+    pwsh -NoProfile -File tools\proje-init-dogrula.ps1 -Repo "C:\devtools\ws\MyApp" -Slug "myApp"
 
   ⭐ Bu script SADEce okur. Hiçbir dosyayı değiştirmez.
 #>
