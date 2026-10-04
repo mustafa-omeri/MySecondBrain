@@ -1,0 +1,60 @@
+# ============================================================
+# Vault .gitignore
+# 2026-09-29 — kaynak belge: "Wiki bir git repo. Versiyon tarihi,
+# branch'leme bedava." (sources/llm-wiki-deseni-kaynak-belge)
+#
+# PRENSİP: Wiki katmanının TAMAMI versiyona girer — çünkü asıl
+# değer oradadır (kararlar, çelişki kayıtları, düzeltmeler).
+# Ham kaynaklar (raw/) dışarıda kalır çünkü:
+#   a) dışarıdan yeniden üretilebilir (Keep export, GitHub snapshot…)
+#   b) git'i yavaşlatır (988 küçük dosya)
+#   c) değişmez — immutable oldukları için geçmişe girmeye ihtiyaçları yok
+# ============================================================
+
+# --- Obsidian arayüz durumu (makineye özel, otomatik üretilir) ---
+.obsidian/
+
+# --- 🔒 Gizli bilgi kasası ---
+# ŞİFRELENMİŞ olsa bile git geçmişi kalıcıdır. Bir parola bir kez
+# sızarsa şifreli metin de kalıcı olarak açılır. Kasayı ASLA commit etme.
+_GIZLI/
+
+# --- Yeniden üretilebilir ham kaynaklar ---
+
+# Google Keep export'u (487 not · 988 dosya · 12,5 MB)
+# → Yeniden almak: Keep Ayarlar → Google Takeout → Gemini/Keep dışa aktar
+raw/knowhow/Keep/
+
+# AI sohbet geçmişi (Claude + Gemini export)
+# → Yeniden almak: platform Ayarları → "Export my data"
+# ⭐ DİKKAT: Klasörün TAMAMI gizlenirse altındaki _SABLON/ da kaybolur ve
+#   kullanıcı sohbet kaydı şablonuna ulaşamaz. Alt klasörleri gizle, kuralı
+#   istisna ile aç (aşağıda).
+raw/chats/*/
+!raw/chats/_SABLON/
+raw/chats/*/**
+!raw/chats/_SABLON/**
+
+# Kod ajanı knowledge-base snapshot'ları
+# → Yeniden almak: vault'u tara, satır sayısı değiştiyse taze al
+#   (bkz. CLAUDE.md §7 — "Snapshot adımı")
+raw/knowledge-base/
+
+# --- Rapor dosyaları (Obsidian'ın kendi ürettiği, geçici) ---
+broken links output.md
+empty files.md
+Hoş geldiniz.md
+
+# --- Geçici / yedek dosyalar ---
+*.bak
+*~
+
+# --- Geçici klasörler ---
+# ⭐ staging/ yapının parçası (CLAUDE.md §3) — klasörün kendisi versiyona
+#   girer, İÇERİĞİ girmez. Aksi halde kullanıcı boş klasörü göremez.
+staging/*
+!staging/.gitkeep
+
+# --- Python önbelleği (tools/secret-vault çalıştırınca oluşur) ---
+__pycache__/
+*.pyc

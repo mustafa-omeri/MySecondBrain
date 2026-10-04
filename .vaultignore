@@ -1,0 +1,49 @@
+# .vaultignore — hiç açılıp okunmayacak yollar
+
+> ⭐ **`.gitignore` ile KARISTIRMA:**
+>
+> | | |
+> |---|---|
+> | `.gitignore` | *commit edilsin mi?* |
+> | ⭐ `.vaultignore` | ***hiç açılıp okunacak mı?*** |
+>
+> Eşleşen yollar: **sayılır** (varlığı bilinir) ama **içeriği okunmaz**,
+> özetlenmez, taranmaz. Bu klasör **hiçbir zaman** wiki'ye girmez.
+
+## Format
+
+```
+# yorum satırı — bu satır yorumdur
+_alt klasör/        # _ ile başlayan her şey taranmaz
+*.tmp
+_build/
+```
+
+> Satır sonundaki `#` açıklama ekler. Pattern git ile aynı mantıkta çalışır.
+
+## Kurallar
+
+---
+
+## ⭐ Şu an **hiçbir kural yok** — bu dosya boş.
+
+Şunu bil: `raw/` altına attığın **her şey** taranacak ve
+`ingest-manifest.md`'ye sayılacak. Bazı şeyleri **istemek** istemiyorsan
+(örneğin büyük geçici klasörler, indirilen veri havuzları) buraya ekle.
+
+## ⭐ Sık yapılan hata
+
+| Hata | Doğrusu |
+|---|---|
+| `.gitignore`'a eklemek | Yanlış dosya — bu **git** içindir |
+| `raw/`'ın tamamını yazmak | ⛔ Ham kaynak **zaten** özel katmandır |
+| Karar vermeden doldurmak | ⭐ Her kural bir gerekçe ister |
+
+## Doğrulama
+
+```powershell
+pwsh -NoProfile -File "<VAULT_YOLU>\tools\vaultignore-dogrula.ps1"
+```
+
+## Related
+- `CLAUDE.md` §7.0 ADIM a0

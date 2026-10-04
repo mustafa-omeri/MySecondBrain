@@ -1,0 +1,1 @@
+C:\devtools\Projects\second_brain_template

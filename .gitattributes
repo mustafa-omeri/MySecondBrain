@@ -1,0 +1,30 @@
+# Vault .gitattributes
+# 2026-10-01 - satir sonu normalizasyonu
+#
+# SORUN: `core.autocrlf=true` oldugu icin calisma agacinda karisik
+# satir sonlari olustu - 86 dosya CRLF, 147 dosya LF. Git'in varsayilani
+# ("LF will be replaced by CRLF") sozunun karsi tarafi tutarli degildi:
+# ayni klasorde iki bicim bir arada, Obsidian'da satir sonu bozulmasi ve
+# gereksiz diff'ler.
+#
+# KURAL: Repoda metin **LF** olarak saklanir. Calisma agaci ise Windows'ta
+# CRLF olur. Boylece:
+#   - diskte Windows'a duygun (Obsidian, VS Code rahat calisir)
+#   - repoda tek bicim (farkli isletim sistemi diff'leri kaybolmaz)
+#   - git uyarisi vermez
+#
+# binary dosyalar bu kurala girmez (text=auto zaten sniffing ile karar verir)
+
+* text=auto eol=lf
+
+# Vault'a girmeyen / uretilen dosyalar - yine de acikca belirt
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.pdf   binary
+*.zip   binary
+*.mp3   binary
+*.mp4   binary
+*.3gp   binary
